@@ -258,7 +258,7 @@ Bu proje MIT lisansı altında sunulmaktadır. Detaylar için `LICENSE` dosyası
 
 ## 📞 İletişim
 
-- **Email**: erenoguz.dev@gmail.com
+- **Email**: erenoguz.developer@gmail.com
 - **LinkedIn**: [ernoguz](https://www.linkedin.com/in/ernoguz/)  
 - **GitHub**: [trustedaid](https://github.com/trustedaid)
 

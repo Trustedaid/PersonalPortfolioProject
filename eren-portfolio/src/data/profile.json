@@ -1,0 +1,86 @@
+{
+  "name": "Eren OĞUZ",
+  "title": "Software Engineer & Backend Developer",
+  "location": "İstanbul, Türkiye",
+  "about": "Elektrik-Elektronik Mühendisliği geçmişine sahip bir yazılım geliştiriciyim. Unity ile oyun geliştirerek başladığım kariyerime .NET ve Node.js gibi teknolojilerle backend alanında devam ediyorum. Angular ve React ile frontend tecrübem de bulunmakta. Mikroservis mimarisi, CQRS, MediatR, FluentValidation gibi yapılarla çalıştım. Aynı zamanda CI/CD süreçlerine ve bulut servislerine (Azure, AWS, GCP) hakimim. Yazılım geliştirmeye, öğrenmeye ve bilgi paylaşımına tutkuyla bağlıyım.",
+  "contacts": {
+    "email": "erenoguz.dev@gmail.com",
+    "github": "https://github.com/trustedaid",
+    "linkedin": "https://www.linkedin.com/in/ernoguz/"
+  },
+  "skills": {
+    "backend": [".NET", "ASP.NET Core", "Node.js", "C#", "MediatR", "CQRS"],
+    "frontend": ["Angular", "JavaScript", "HTML", "CSS"],
+    "tools": ["Git", "Docker", "PostgreSQL", "MongoDB", "Redis", "RabbitMQ", "Jenkins", "Azure", "AWS", "Google Cloud", "Rider", "Visual Studio", "VS Code"]
+  },
+  "experience": [
+    {
+      "role": "Backend Developer",
+      "org": "Unilogistix",
+      "start": "Apr 2023",
+      "end": "June 2024",
+      "desc": "Mikroservis tabanlı bir altyapıda ASP.NET Core 6 & 7 kullanarak RESTful API'ler geliştirdim. Bu süreçte CQRS, MediatR, Repository Design Pattern, Unit of Work Pattern ve Dependency Injection gibi tasarım kalıplarını uyguladım. Veri doğrulama için FluentValidation, nesne eşleme için AutoMapper, loglama için Serilog ve güvenli kimlik doğrulama/yetkilendirme için JWT kullandım.PostgreSQL, MongoDB ve Redis gibi farklı veritabanlarıyla çalıştım. Mesajlaşma altyapısı için RabbitMQ ve gerçek zamanlı cihaz iletişimi için MQTT kullandım. Azure DevOps, Jenkins ve Portainer.IO ile CI/CD süreçlerini yönettim. Projelerin tüm geliştirme döngüsü boyunca kapsamlı dokümantasyon hazırladım."
+    },
+    {
+      "role": "Unity Game Developer",
+      "org": "Atlas Space",
+      "start": "Aug 2022",
+      "end": "Apr 2022",
+      "desc": "Unity C# kullanarak 2D, 3D ve VR tabanlı oyunlar geliştirdim. Oyun mekaniği, kullanıcı arayüzü, AI davranışları ve oyun içi etkileşimler üzerinde çalıştım. Oyunların performansını optimize ettim ve kullanıcı deneyimini iyileştirmek için geri bildirimleri değerlendirdim."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Lisans - Elektrik Elektronik Mühendisliği",
+      "school": "İstanbul Bilgi Üniversitesi",
+      "start": "2014",
+      "end": "2022",
+      "gpa": "2.57/4.0"
+    }
+  ],
+  "certificates": [
+    {
+      "title": "ASP.NET Core Web API Geliştirme",
+      "issuer": "Udemy"
+    },
+    {
+      "title": "Microservices Architecture with .NET",
+      "issuer": "Udemy"
+    }
+  ],
+    "languages": [
+        {
+        "name": "Türkçe",
+        "level": "Ana Dil"
+        },
+        {
+        "name": "İngilizce",
+        "level": "Intermediate"
+        }
+    ],
+  "projects": [
+    {
+      "title": "Cario Araç Takip Sistemleri",
+        "description": "ASP.NET Core, React ve Flutter kullanarak geliştirdiğim araç takip sistemi.",
+        "technologies": ["ASP.NET Core", "React", "Flutter", "Docker", "PostgreSQL", "Redis", "RabbitMQ"]
+    },
+    {
+      "title": "SmartGateX",
+      "description": "Akıllı otomasyon özellikleri ve yapay zeka destekli plaka tanıma sistemi ile donatılmış bir araç geçiş kontrol sistemi geliştirdim.",
+      "technologies": ["ASP.NET Core", "Pyhon", "Flask", "OpenCV", "Docker", "PostgreSQL", "Redis", "RabbitMQ"]
+    },
+    {
+      "title": "Finansal Takip Uygulaması",
+      "description": "ASP .NET Core, React Ve MAUI kullanarak geliştirdiğim bir finansal takip uygulaması. Kullanıcıların gelir ve giderlerini takip etmelerini sağlıyor.",
+      "technologies": ["ASP.NET Core", "React", "MAUI", "Docker", "MongoDB"]
+    },
+    {
+      "title": "Mini E-Ticaret Projesi",
+      "description": "ASP.NET Core ve Angular kullanarak geliştirdiğim mini bir e-ticaret projesi. Ürün yönetimi, kullanıcı kaydı ve sipariş takibi gibi temel özellikleri içeriyor.",
+      "technologies": ["ASP.NET Core", "Angular", "Docker", "PostgreSQL"]
+    }
+
+
+
+  ]
+}

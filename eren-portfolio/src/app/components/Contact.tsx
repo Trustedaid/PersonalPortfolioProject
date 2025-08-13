@@ -18,7 +18,7 @@ const contactLinks = [
 	},
 	{
 		label: "Email",
-		href: "mailto:erenoguz.dev@gmail.com",
+		href: "mailto:erenoguz.developer@gmail.com",
 		icon: <FaEnvelope className="w-5 h-5 text-green-600" />,
 		descKey: "email" as ContactDescKey,
 	},

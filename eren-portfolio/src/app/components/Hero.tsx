@@ -64,7 +64,7 @@ export default function Hero() {
             {t.hero.projectsBtn}
           </a>
           <a
-            href="#contact"
+            href="mailto:erenoguz.developer@gmail.com"
             className="flex-1 text-center px-8 py-3 rounded-full border-2 border-blue-500 text-blue-700 dark:text-blue-300 font-semibold bg-white/60 dark:bg-zinc-900/60 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all duration-300 shadow hover-scale"
           >
             {t.hero.contactBtn}

@@ -40,7 +40,7 @@ const projectsData = [
 			{ name: "Tailwind CSS", icon: <SiTailwindcss className="w-4 h-4 text-cyan-400" /> },
 			{ name:  "MAUI (.NET Multi-platform App UI)", icon: <SiDotnet className="w-4 h-4 text-red-700" /> ,}
 		],
-		demo: "#",
+		demo: "https://github.com/Trustedaid/FinancialTracker",
 	},
 	{
 		tech: [

@@ -120,8 +120,8 @@ export default function Navbar() {
           />
           {/* Mobile menu */}
           <aside
-            className="ml-auto h-full w-72 bg-zinc-900 dark:bg-zinc-900 shadow-2xl z-10 flex flex-col animate-slide-in"
-            aria-hidden={!open}
+              className="ml-auto h-full w-72 bg-zinc-900 dark:bg-zinc-900 shadow-2xl z-10 flex flex-col animate-slide-in"
+              aria-hidden={!open}
           >
             <div className="flex items-center justify-between px-8 py-6 border-b border-zinc-200 dark:border-zinc-800">
               <span className="font-extrabold text-2xl text-blue-700 dark:text-blue-400">Eren</span>
@@ -135,7 +135,7 @@ export default function Navbar() {
                 <svg className="w-8 h-8 text-blue-700 dark:text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
-            <nav className="flex flex-col gap-4 px-8 py-8 flex-1 justify-center">
+            <nav className="flex flex-col gap-4 px-8 py-8 flex-1 justify-center bg-zinc-900/70 dark:bg-zinc-900/70 backdrop-blur-md shadow-2xl z-10 animate-slide-in">
               {NAV_LINKS.map((link: NavLink) => (
                 <a
                   key={link.href}

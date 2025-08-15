@@ -58,6 +58,7 @@
         backend: "Arka Uç",
         frontend: "Ön Uç",
         database: "Veritabanı",
+        mobile: "Mobil",
         devops: "DevOps",
         tools: "Araçlar",
         devtools: "Geliştirme Araçları"
@@ -226,6 +227,7 @@
         backend: "Backend",
         frontend: "Frontend",
         database: "Database",
+        mobile: "Mobile",
         devops: "DevOps",
         tools: "Tools",
         devtools: "Dev Tools"

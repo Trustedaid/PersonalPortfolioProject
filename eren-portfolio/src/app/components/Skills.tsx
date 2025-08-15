@@ -112,7 +112,6 @@ export default function Skills() {
               <h3 className="text-xl font-bold mb-2 text-zinc-700 dark:text-zinc-200 text-center">
                 {(group.category === "backend" && "Backend") ||
                  (group.category === "frontend" && "Frontend") ||
-                 (group.category === "mobile" && "Mobile") ||
                  t.skills.categories[group.category as keyof typeof t.skills.categories] || group.category}
               </h3>
               <div className="flex flex-wrap justify-center gap-3">

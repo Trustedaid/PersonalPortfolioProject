@@ -57,8 +57,8 @@ export default function Hero() {
       <div className="animate-fade-in-up delay-400">
         <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center items-center mb-6">
           <a
-            href="/Eren-OGUZ_Software-Engineer_Resume.pdf"
-            download="Eren-OGUZ_Software-Engineer_Resume.pdf"
+            href="/Eren-OGUZ_SoftwareDeveloper_Resume.pdf"
+            download="Eren-OGUZ_SoftwareDeveloper_Resume.pdf"
             className="flex-1 text-center px-8 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 hover-glow animate-glow"
           >
             {t.hero.projectsBtn}

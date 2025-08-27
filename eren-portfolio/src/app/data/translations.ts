@@ -76,7 +76,7 @@
     hero: {
       title: "Merhaba, Ben {name}",
       description: "Yazılım geliştirme tutkusu ile yeni teknolojileri öğrenmeyi ve uygulamayı seviyorum. Modern web ve mobil teknolojileriyle projeler geliştiriyorum.",
-      projectsBtn: "Özgeçmiş",
+      projectsBtn: "Özgeçmiş(PDF)",
       contactBtn: "İletişim"
     },
     experience: {
@@ -245,7 +245,7 @@
     hero: {
       title: "Hi, I'm {name}",
       description: "I love learning and applying new technologies with a passion for software development. I build projects with modern web and mobile technologies.",
-      projectsBtn: "Resume",
+      projectsBtn: "Resume(PDF)",
       contactBtn: "Contact"
     },
     experience: {

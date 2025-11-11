@@ -1,6 +1,6 @@
 import MatrixBackground from "./MatrixBackground";
 import {FaAngular, FaPython, FaReact} from "react-icons/fa";
-import {SiNextdotjs, SiDotnet, SiTailwindcss, SiPostgresql, SiVuedotjs} from "react-icons/si";
+import {SiNextdotjs, SiDotnet, SiTailwindcss, SiPostgresql, SiRedis} from "react-icons/si";
 import {FaFlutter} from "react-icons/fa6";
 import { useLanguage } from "../hooks/LanguageContext";
 import translations from "../data/translations";
@@ -44,13 +44,14 @@ const projectsData = [
 	},
 	{
 		tech: [
-			{ name: "Tailwind CSS", icon: <SiTailwindcss className="w-4 h-4 text-cyan-400" /> },
-			{ name: "Next.js", icon: <SiNextdotjs className="w-4 h-4 text-zinc-800 dark:text-white" /> },
 			{ name: ".NET Core", icon: <SiDotnet className="w-4 h-4 text-blue-700" /> },
-			{ name: "VueJs", icon: <SiVuedotjs className="w-4 h-4 text-green-900" /> },
+			{ name: "React", icon: <FaReact className="w-4 h-4 text-cyan-400" /> },
+			{ name: "ReactNative", icon: <FaReact className="w-4 h-4 text-cyan-400" /> },
+			{ name: "Redis", icon: <SiRedis className="w-4 h-4 text-cyan-400" /> },
+			{ name: "Tailwind CSS", icon: <SiTailwindcss className="w-4 h-4 text-cyan-400" /> },
 
 		],
-		demo: "#",
+		demo: "https://github.com/Trustedaid/LapMate",
 	},
 	{
 		tech: [

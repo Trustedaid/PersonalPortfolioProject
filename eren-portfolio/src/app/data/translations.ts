@@ -158,8 +158,8 @@
           description: "Kullanıcıların kişisel finanslarını kolayca yönetmelerini sağlamak, gelir ve giderlerini takip etmelerine olanak tanımak ve bütçe planlaması yapmalarına yardımcı olmak."
         },
         {
-          title: "Çok Yakında...",
-          description: "Çok Yakında..."
+          title: "LapMate",
+          description: "Tur sürelerini ölçen, pistleri haritalandıran ve ayrıntılı zaman ile grafik karşılaştırmalarıyla arkadaşlarınızla veya global liderlik tablolarında rekabet etmenizi sağlayan bir pist takip uygulaması."
         },
         {
           title: "Çok Yakında...",
@@ -327,8 +327,8 @@
           description: "To enable users to easily manage their personal finances, track their income and expenses, and help them with budget planning."
         },
         {
-          title: "Coming Soon...",
-          description: "Coming Soon..."
+          title: "LapMate",
+          description: "Racing companion tracking app that measures lap times, maps tracks, and lets you compete with friends or on global leaderboards through detailed time and graph comparisons."
         },
         {
           title: "Coming Soon...",

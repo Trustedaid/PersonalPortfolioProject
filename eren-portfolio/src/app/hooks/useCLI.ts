@@ -90,8 +90,8 @@ ${profileData.about}`,
   download: () => {
     // Create download link and trigger download
     const link = document.createElement('a');
-    link.href = '/Eren-OGUZ_Software-Engineer_Resume.pdf';
-    link.download = 'Eren-OGUZ_Software-Engineer_Resume.pdf';
+    link.href = '/Eren-OGUZ_SoftwareDeveloper_Resume.pdf';
+    link.download = 'Eren-OGUZ_SoftwareDeveloper_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

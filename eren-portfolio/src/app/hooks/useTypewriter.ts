@@ -16,22 +16,26 @@ export const useTypewriter = ({ text, speed = 50, delay = 0 }: UseTypewriterProp
     setDisplayText('');
     setIsTyping(true);
 
+    let interval: ReturnType<typeof setInterval> | undefined;
+
     const timeout = setTimeout(() => {
       let index = 0;
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         if (index < text.length) {
           setDisplayText(text.slice(0, index + 1));
           index++;
         } else {
           setIsTyping(false);
-          clearInterval(interval);
+          if (interval) clearInterval(interval);
         }
       }, speed);
-
-      return () => clearInterval(interval);
     }, delay);
 
-    return () => clearTimeout(timeout);
+    // Hem timeout hem interval temizlenir (metin değişince sızıntı olmaz)
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
   }, [text, speed, delay]);
 
   return { displayText, isTyping };

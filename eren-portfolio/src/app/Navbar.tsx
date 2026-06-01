@@ -1,6 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useLanguage } from "./hooks/LanguageContext";
+import { useActiveSection } from "./hooks/useActiveSection";
+
+const SECTION_IDS = ["about", "skills", "experience", "education", "projects", "contact"];
 
 
 interface NavLink {
@@ -29,6 +32,7 @@ export default function Navbar() {
   const [open, setOpen] = useState<boolean>(false);
   const { language, setLanguage } = useLanguage();
   const NAV_LINKS = language === "tr" ? NAV_LINKS_TR : NAV_LINKS_EN;
+  const activeSection = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
     if (open) {
@@ -51,11 +55,16 @@ export default function Navbar() {
         </div>
         {/* Desktop links - ortada */}
         <div className="hidden md:flex gap-2 lg:gap-6 mx-auto">
-          {NAV_LINKS.map((link: NavLink) => (
+          {NAV_LINKS.map((link: NavLink) => {
+            const isActive = link.href === `#${activeSection}`;
+            return (
             <a
               key={link.href}
               href={link.href}
-              className="nav-underline relative px-3 py-1.5 text-text-sec font-medium transition-colors duration-200 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md"
+              aria-current={isActive ? "true" : undefined}
+              className={`nav-underline relative px-3 py-1.5 font-medium transition-colors duration-200 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md ${
+                isActive ? "text-accent" : "text-text-sec"
+              }`}
               onClick={e => {
                 const targetId = link.href.replace('#', '');
                 const targetElement = document.getElementById(targetId);
@@ -68,7 +77,8 @@ export default function Navbar() {
             >
               {link.label}
             </a>
-          ))}
+            );
+          })}
         </div>
         {/* Dil seçici - sağa hizalı */}
         <div className="flex items-center gap-4 ml-auto">

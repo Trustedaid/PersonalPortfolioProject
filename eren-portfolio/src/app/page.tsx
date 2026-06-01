@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from "next/dynamic";
 import AmbientBackground from "./components/AmbientBackground";
+import IntroLoader from "./components/IntroLoader";
+import ScrollToTop from "./components/ScrollToTop";
 import Hero from "./components/Hero";
 import AboutMe from "./components/AboutMe";
 import Skills from "./components/Skills";
@@ -10,8 +13,10 @@ import Education from "./components/Education";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import CLI from "./components/CLI";
 import CLIToggle from "./components/CLIToggle";
+
+// CLI ağır ve başlangıçta gerekmiyor — talep üzerine yüklenir
+const CLI = dynamic(() => import("./components/CLI"), { ssr: false });
 
 export default function Home() {
   const [isCLIActive, setIsCLIActive] = useState(false);
@@ -21,6 +26,7 @@ export default function Home() {
 
   return (
     <>
+      <IntroLoader />
       <AmbientBackground />
       <main className="relative z-10 min-h-screen w-full overflow-hidden">
         <Hero />
@@ -40,10 +46,13 @@ export default function Home() {
         
         {/* CLI Toggle Button - only show when CLI is not active */}
         {!isCLIActive && <CLIToggle onToggleAction={activateCLI} />}
+
+        {/* Yukarı dön butonu */}
+        <ScrollToTop />
       </main>
 
-      {/* CLI Component */}
-      <CLI isActive={isCLIActive} onDeactivateAction={deactivateCLI} />
+      {/* CLI Component (lazy) */}
+      {isCLIActive && <CLI isActive={isCLIActive} onDeactivateAction={deactivateCLI} />}
     </>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "./hooks/LanguageContext";
 import { useActiveSection } from "./hooks/useActiveSection";
@@ -35,6 +36,9 @@ export default function Navbar() {
   const NAV_LINKS = language === "tr" ? NAV_LINKS_TR : NAV_LINKS_EN;
   const activeSection = useActiveSection(SECTION_IDS);
   const reduce = useReducedMotion();
+  // Portal yalnızca client'ta çalışsın (SSR uyumsuzluğunu önler)
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (open) {
@@ -114,10 +118,14 @@ export default function Navbar() {
           </div>
         </button>
       </div>
-      {/* Mobil menü — glassmorphism panel + bulanık mozaik overlay */}
-      <AnimatePresence>
-        {open && (
-          <div className="fixed inset-0 z-40 flex md:hidden">
+      {/* Mobil menü — glassmorphism panel + bulanık mozaik overlay.
+          Portal ile body'ye taşınır: navbar'ın backdrop-blur'ü fixed menüyü
+          kendi kutusuna hapsetmesin (aksi halde menü "arkada/görünmez" kalıyor). */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <div className="fixed inset-0 z-[70] flex md:hidden">
             {/* Bulanık mozaik overlay: arkadaki içeriği yumuşatır */}
             <motion.div
               className="absolute inset-0 z-10 bg-base/40 backdrop-blur-xl backdrop-saturate-150"
@@ -205,9 +213,11 @@ export default function Navbar() {
                 })}
               </motion.nav>
             </motion.aside>
-          </div>
+              </div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </nav>
   );
 }

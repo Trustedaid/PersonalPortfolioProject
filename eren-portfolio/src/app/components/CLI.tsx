@@ -26,10 +26,11 @@ function TypewriterOutput({ text, isLatest }: TypewriterOutputProps) {
 
 export default function CLI({ isActive, onDeactivateAction }: CLIProps) {
   const {
-    state, 
-    executeCommand, 
-    setCurrentInput, 
-    inputRef 
+    state,
+    executeCommand,
+    setCurrentInput,
+    navigateHistory,
+    inputRef
   } = useCLI();
   
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -58,10 +59,21 @@ export default function CLI({ isActive, onDeactivateAction }: CLIProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (state.currentInput.trim()) {
+      const firstToken = state.currentInput.trim().toLowerCase().split(/\s+/)[0];
       executeCommand(state.currentInput);
-      if (state.currentInput.trim() === '/exit' || state.currentInput.trim() === '/web') {
+      if (firstToken === '/exit' || firstToken === '/web') {
         onDeactivateAction();
       }
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      navigateHistory('up');
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      navigateHistory('down');
     }
   };
 
@@ -97,8 +109,8 @@ export default function CLI({ isActive, onDeactivateAction }: CLIProps) {
             return (
               <div key={index} className="mb-4">
                 {item.command && (
-                  <div className="flex items-center text-green-400 mb-1">
-                    <span className="text-blue-400 mr-2">eren@portfolio:~$</span>
+                  <div className="flex items-center text-emerald-400 mb-1">
+                    <span className="text-emerald-500 mr-2">eren@portfolio:~$</span>
                     <span>{item.command}</span>
                   </div>
                 )}
@@ -111,14 +123,15 @@ export default function CLI({ isActive, onDeactivateAction }: CLIProps) {
 
           {/* Current Input Line */}
           <form onSubmit={handleSubmit} className="flex items-center">
-            <span className="text-blue-400 mr-2">eren@portfolio:~$</span>
+            <span className="text-emerald-500 mr-2">eren@portfolio:~$</span>
             <input
               ref={inputRef}
               type="text"
               value={state.currentInput}
               onChange={(e) => setCurrentInput(e.target.value)}
-              className="flex-1 bg-transparent text-green-400 outline-none font-mono"
-              placeholder="Komut yazın... (yardım için /help)"
+              onKeyDown={handleKeyDown}
+              className="flex-1 bg-transparent text-emerald-400 outline-none font-mono"
+              placeholder="Komut yazın... (yardım için /help · ↑/↓ geçmiş)"
               autoComplete="off"
               spellCheck={false}
             />

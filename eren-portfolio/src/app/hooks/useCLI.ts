@@ -15,6 +15,15 @@ export interface CLIState {
   currentInput: string;
 }
 
+const WELCOME_MESSAGE = `Terminal Modu Aktif 🚀
+
+Eren OĞUZ Portfolio CLI v1.0
+Yardım için /help yazın. Normal görünüme dönmek için /exit yazın.`;
+
+const createWelcomeHistory = (): CLICommand[] => [
+  { command: '', output: WELCOME_MESSAGE, timestamp: new Date() },
+];
+
 const COMMANDS = {
   help: () => `Kullanılabilir komutlar:
   /help          - Bu yardım menüsünü gösterir
@@ -106,32 +115,37 @@ ${profileData.about}`,
 export const useCLI = () => {
   const [state, setState] = useState<CLIState>({
     isActive: false,
-    history: [{
-      command: '',
-      output: `Terminal Modu Aktif 🚀
-
-Eren OĞUZ Portfolio CLI v1.0
-Yardım için /help yazın. Normal görünüme dönmek için /exit yazın.`,
-      timestamp: new Date()
-    }],
+    history: createWelcomeHistory(),
     currentInput: ''
   });
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Yukarı/aşağı ok ile geri çağırmak için girilen komut geçmişi
+  const commandLog = useRef<string[]>([]);
+  const historyIndex = useRef<number>(-1);
+
   const executeCommand = useCallback((input: string) => {
-    const command = input.toLowerCase().trim();
+    const trimmed = input.trim();
+    const command = trimmed.toLowerCase();
     let output: string;
+
+    // Çalıştırılan komutu geçmişe ekle (recall için)
+    if (trimmed) {
+      commandLog.current.push(trimmed);
+      historyIndex.current = commandLog.current.length;
+    }
 
     if (command === '' || !command.startsWith('/')) {
       output = 'Komutlar "/" ile başlamalıdır. Yardım için /help yazın.';
     } else {
-      const cmd = command.slice(1); // Remove the '/' prefix
-      
+      // İlk token'ı al; ekstra argümanları yok say (ör. "/help foo" -> "help")
+      const cmd = command.slice(1).split(/\s+/)[0];
+
       if (cmd in COMMANDS) {
         output = COMMANDS[cmd as keyof typeof COMMANDS]();
       } else {
-        output = `Bilinmeyen komut: ${command}. Yardım için /help yazın.`;
+        output = `Bilinmeyen komut: /${cmd}. Yardım için /help yazın.`;
       }
     }
 
@@ -145,10 +159,11 @@ Yardım için /help yazın. Normal görünüme dönmek için /exit yazın.`,
     }
 
     if (output === 'EXIT_COMMAND') {
+      // Çıkışta karşılama ekranına sıfırla; tekrar açıldığında boş kalmaz
       setState(prev => ({
         ...prev,
         isActive: false,
-        history: [],
+        history: createWelcomeHistory(),
         currentInput: ''
       }));
       return;
@@ -169,6 +184,22 @@ Yardım için /help yazın. Normal görünüme dönmek için /exit yazın.`,
     setState(prev => ({ ...prev, currentInput: input }));
   }, []);
 
+  // Yukarı/aşağı ok ile önceki komutları gezin
+  const navigateHistory = useCallback((direction: 'up' | 'down') => {
+    const log = commandLog.current;
+    if (log.length === 0) return;
+
+    if (direction === 'up') {
+      historyIndex.current = Math.max(0, historyIndex.current - 1);
+    } else {
+      historyIndex.current = Math.min(log.length, historyIndex.current + 1);
+    }
+
+    const recalled =
+      historyIndex.current >= log.length ? '' : log[historyIndex.current];
+    setState(prev => ({ ...prev, currentInput: recalled }));
+  }, []);
+
   // Focus input when needed
   useEffect(() => {
     if (inputRef.current) {
@@ -180,6 +211,7 @@ Yardım için /help yazın. Normal görünüme dönmek için /exit yazın.`,
     state,
     executeCommand,
     setCurrentInput,
+    navigateHistory,
     inputRef
   };
 };

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import profile from "../data/profile.json";
 import Navbar from "./Navbar";
+import ScrollProgress from "./components/ScrollProgress";
 import { LanguageProvider } from "./hooks/LanguageContext";
 
 const geistSans = Geist({
@@ -43,10 +44,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" className="dark">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#18181b" />
+        <meta name="theme-color" content="#0A0A0A" />
         <title>{profile.title}</title>
         <meta name="description" content={profile.about} />
         <meta name="keywords" content={keywords.join(", ")} />
@@ -94,8 +95,9 @@ export default function RootLayout({
           })
         }} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-base text-text`}>
         <LanguageProvider>
+          <ScrollProgress />
           <Navbar />
           {children}
         </LanguageProvider>

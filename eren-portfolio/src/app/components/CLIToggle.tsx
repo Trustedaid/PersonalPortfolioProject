@@ -12,7 +12,7 @@ export default function CLIToggle({ onToggleAction }: CLIToggleProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Ctrl + ` (backtick) to toggle CLI
-      if (e.ctrlKey && e.key === '"') {
+      if (e.ctrlKey && e.key === '`') {
         e.preventDefault();
         onToggleAction();
       }
@@ -42,7 +42,7 @@ export default function CLIToggle({ onToggleAction }: CLIToggleProps) {
       {/* Fixed CLI Toggle Button */}
       <button
         onClick={onToggleAction}
-        className="fixed bottom-6 right-6 z-40 bg-green-500/90 hover:bg-green-400 text-black shadow-lg backdrop-blur-sm transition-all duration-500 ease-in-out group overflow-hidden rounded-full hover:rounded-xl hover:px-6 hover:py-3 p-3"
+        className="fixed bottom-6 right-6 z-40 bg-accent/90 hover:bg-accent text-black shadow-[0_0_24px_rgba(16,185,129,0.4)] backdrop-blur-sm transition-all duration-500 ease-in-out group overflow-hidden rounded-full hover:rounded-xl hover:px-6 hover:py-3 p-3"
         title="CLI Modunu Aç (Ctrl + `)"
       >
         <div className="flex items-center justify-center transition-all duration-500 ease-in-out">
@@ -69,13 +69,13 @@ export default function CLIToggle({ onToggleAction }: CLIToggleProps) {
 
       {/* Keyboard shortcut hint */}
       {showHint && (
-        <div className="fixed bottom-20 right-6 z-50 px-3 py-2 bg-black/90 text-green-400 text-sm rounded-lg font-mono backdrop-blur-sm">
-          Press &quot; to open CLI
+        <div className="fixed bottom-20 right-6 z-50 px-3 py-2 bg-black/90 text-emerald-400 text-sm rounded-lg font-mono backdrop-blur-sm border border-emerald-500/30">
+          Press <kbd className="px-1">`</kbd> (backtick) to open CLI
         </div>
       )}
 
       {/* Matrix-style hint animation */}
-      <div className="fixed bottom-4 left-4 z-40 text-green-400/60 font-mono text-xs animate-pulse">
+      <div className="fixed bottom-4 left-4 z-40 text-accent/60 font-mono text-xs animate-pulse">
         <div className="flex items-center space-x-2">
           <span className="animate-bounce">{'>'}</span>
           <span>Ctrl + ` for CLI</span>

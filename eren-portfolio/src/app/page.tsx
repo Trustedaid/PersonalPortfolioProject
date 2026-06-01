@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import MatrixBackground from "./components/MatrixBackground";
+import AmbientBackground from "./components/AmbientBackground";
 import Hero from "./components/Hero";
 import AboutMe from "./components/AboutMe";
 import Skills from "./components/Skills";
@@ -21,15 +21,15 @@ export default function Home() {
 
   return (
     <>
-      <main className="relative min-h-screen w-full overflow-hidden">
-        <MatrixBackground />
+      <AmbientBackground />
+      <main className="relative z-10 min-h-screen w-full overflow-hidden">
         <Hero />
         <section id="about">
           <AboutMe />
         </section>
-        {/* Skills ile Matrix arasında blur divider */}
-        <div className="w-full h-12 flex items-center justify-center">
-          <div className="w-2/3 h-8 rounded-full bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md shadow-lg" />
+        {/* Bölüm ayracı — neon gradient ince çizgi */}
+        <div className="w-full h-16 flex items-center justify-center">
+          <div className="w-1/2 max-w-xs h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
         </div>
         <Skills />
         <Experience />

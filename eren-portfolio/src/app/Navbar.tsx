@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "./hooks/LanguageContext";
 import { useActiveSection } from "./hooks/useActiveSection";
 
@@ -33,6 +34,7 @@ export default function Navbar() {
   const { language, setLanguage } = useLanguage();
   const NAV_LINKS = language === "tr" ? NAV_LINKS_TR : NAV_LINKS_EN;
   const activeSection = useActiveSection(SECTION_IDS);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     if (open) {
@@ -112,57 +114,100 @@ export default function Navbar() {
           </div>
         </button>
       </div>
-      {/* Mobil menü ve overlay sadece açıkken render edilir */}
-      {open && (
-        <div className="fixed inset-0 z-40 flex">
-          {/* Overlay */}
-          <div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 z-10"
-            onClick={() => setOpen(false)}
-            aria-hidden={!open}
-            role="button"
-            tabIndex={0}
-          />
-          {/* Mobile menu */}
-          <aside
-              className="ml-auto h-full w-72 bg-elevated border-l border-line shadow-2xl z-10 flex flex-col animate-slide-in"
+      {/* Mobil menü — glassmorphism panel + bulanık mozaik overlay */}
+      <AnimatePresence>
+        {open && (
+          <div className="fixed inset-0 z-40 flex md:hidden">
+            {/* Bulanık mozaik overlay: arkadaki içeriği yumuşatır */}
+            <motion.div
+              className="absolute inset-0 z-10 bg-base/40 backdrop-blur-xl backdrop-saturate-150"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.3 }}
+              onClick={() => setOpen(false)}
               aria-hidden={!open}
-          >
-            <div className="flex items-center justify-between px-8 py-6 border-b border-line">
-              <span className="font-extrabold text-2xl text-gradient">Eren</span>
-              <button
-                className="w-10 h-10 flex items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-accent"
-                aria-label="Menüyü Kapat"
-                onClick={() => setOpen(false)}
-                type="button"
-              >
-                <span className="sr-only">Menüyü Kapat</span>
-                <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-              </button>
-            </div>
-            <nav className="flex flex-col gap-4 px-8 py-8 flex-1 justify-center z-10 animate-slide-in">
-              {NAV_LINKS.map((link: NavLink) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-4 rounded-xl text-text text-lg font-semibold border border-transparent hover:border-accent/40 hover:bg-accent/5 hover:text-accent transition-colors duration-200 text-center"
-                  onClick={(e) => {
-                    const targetId = link.href.replace('#', '');
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                      e.preventDefault();
-                      targetElement.scrollIntoView({ behavior: 'smooth' });
-                    }
-                    setOpen(false);
-                  }}
+              role="button"
+              tabIndex={0}
+            />
+
+            {/* Buzlu cam panel */}
+            <motion.aside
+              className="relative ml-auto h-full w-72 z-20 flex flex-col overflow-hidden border-l border-white/10 bg-elevated/50 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_8px_60px_rgba(0,0,0,0.5)]"
+              aria-hidden={!open}
+              initial={{ x: reduce ? 0 : "100%", opacity: reduce ? 0 : 1 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: reduce ? 0 : "100%", opacity: reduce ? 0 : 1 }}
+              transition={
+                reduce
+                  ? { duration: 0 }
+                  : { type: "spring", stiffness: 260, damping: 30 }
+              }
+            >
+              {/* Cam üstü ince ışık çizgisi + neon kenar parıltısı */}
+              <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+              <span className="pointer-events-none absolute inset-y-0 left-0 w-px bg-gradient-to-b from-accent/40 via-purple/30 to-transparent" />
+              {/* Yumuşak neon hale */}
+              <span className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
+              <span className="pointer-events-none absolute bottom-0 -left-16 h-56 w-56 rounded-full bg-purple/15 blur-3xl" />
+
+              <div className="relative flex items-center justify-between px-8 py-6 border-b border-white/10">
+                <span className="font-extrabold text-2xl text-gradient">Eren</span>
+                <button
+                  className="w-10 h-10 flex items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-accent"
+                  aria-label="Menüyü Kapat"
+                  onClick={() => setOpen(false)}
+                  type="button"
                 >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </aside>
-        </div>
-      )}
+                  <span className="sr-only">Menüyü Kapat</span>
+                  <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+              </div>
+
+              <motion.nav
+                className="relative flex flex-col gap-3 px-6 py-8 flex-1 justify-center"
+                initial="hidden"
+                animate="show"
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: reduce ? 0 : 0.07, delayChildren: 0.1 } },
+                }}
+              >
+                {NAV_LINKS.map((link: NavLink) => {
+                  const isActive = link.href === `#${activeSection}`;
+                  return (
+                    <motion.a
+                      key={link.href}
+                      href={link.href}
+                      aria-current={isActive ? "true" : undefined}
+                      variants={{
+                        hidden: { opacity: 0, x: reduce ? 0 : 24 },
+                        show: { opacity: 1, x: 0 },
+                      }}
+                      className={`px-4 py-3.5 rounded-xl text-lg font-semibold text-center border backdrop-blur-sm transition-colors duration-200 ${
+                        isActive
+                          ? "border-accent/50 bg-accent/10 text-accent shadow-[0_0_18px_rgba(16,185,129,0.15)]"
+                          : "border-white/10 bg-white/5 text-text hover:border-accent/40 hover:bg-accent/10 hover:text-accent"
+                      }`}
+                      onClick={(e) => {
+                        const targetId = link.href.replace('#', '');
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                          e.preventDefault();
+                          targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        setOpen(false);
+                      }}
+                    >
+                      {link.label}
+                    </motion.a>
+                  );
+                })}
+              </motion.nav>
+            </motion.aside>
+          </div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
